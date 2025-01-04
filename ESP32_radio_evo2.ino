@@ -982,6 +982,11 @@ void changeStation()
   if (stationUrl.isEmpty())
   {
     Serial.println("Błąd: Nie znaleziono stacji dla podanego numeru.");
+    Serial.print("Numer stacji:");
+    Serial.println(station_nr);
+    Serial.print("Numer banku:");
+    Serial.println(bank_nr);
+
     return;
   }
 
@@ -2350,11 +2355,14 @@ void readStationFromSD()
     else
     {
       Serial.println("Błąd podczas otwierania pliku station_nr.txt.");
+      
+     
     }
   }
   else
   {
     Serial.println("Plik station_nr.txt nie istnieje.");
+    station_nr = 9; // ustawiamy stacje w przypadku braku pliku na karcie
   }
 
   // Sprawdź, czy plik bank_nr.txt istnieje
@@ -2376,6 +2384,8 @@ void readStationFromSD()
   else
   {
     Serial.println("Plik bank_nr.txt nie istnieje.");
+    bank_nr = 1; // // ustawiamy bank w przypadku braku pliku na karcie
+    previous_bank_nr = bank_nr;
   }
 }
 
